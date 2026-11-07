@@ -4,13 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VanQuang</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#121316">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="VanQuang">
 <style>
 :root{--bg:#f3f1ec;--card:#fff;--ink:#17181c;--mute:#6b6e76;--line:#dcd8ce;--acc:#e4372c;--btn:#1f4fe0;--btn-t:#fff;--note:#e3efe6;--note-t:#1d5a34;color-scheme:light}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121316;--card:#1b1c21;--ink:#f2f2f4;--mute:#9a9da6;--line:#2c2e35;--acc:#ff5a4d;--btn:#2d5cf0;--note:#10302a;--note-t:#7fe0a8;color-scheme:dark}}
@@ -540,8 +533,10 @@ function route(){
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
+/* Gỡ bản app cũ (nếu máy khách đã cài) để không bị lỗi khi các file app đã xóa */
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
+  if (window.caches) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
 }
 route();
 </script>
