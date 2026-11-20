@@ -4,20 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VanQuang</title>
+<script>(function(){var t="light";try{t=localStorage.getItem("vq_theme")||"light"}catch(e){}document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"light")})();</script>
 <style>
-:root{--bg:#f3f1ec;--card:#fff;--ink:#17181c;--mute:#6b6e76;--line:#dcd8ce;--acc:#e4372c;--btn:#1f4fe0;--btn-t:#fff;--note:#e3efe6;--note-t:#1d5a34;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121316;--card:#1b1c21;--ink:#f2f2f4;--mute:#9a9da6;--line:#2c2e35;--acc:#ff5a4d;--btn:#2d5cf0;--note:#10302a;--note-t:#7fe0a8;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#070d1c;--card:#0d172b;--ink:#f2f5ff;--mute:#9ba8c2;--line:#1b2a45;--acc:#ff5a4d;--btn:#1458a8;--note:#0d342e;--note-t:#80e6b2;color-scheme:dark}
-:root[data-theme="light"]{--bg:#f7f8fc;--card:#fff;--ink:#171b2b;--mute:#6d7485;--line:#e2e6ef;--acc:#e4372c;--btn:#1f4fe0;--btn-t:#fff;--note:#e3efe6;--note-t:#1d5a34;color-scheme:light}
+:root,:root[data-theme="light"]{--bg:#f6f7ff;--card:#ffffff;--ink:#1b2150;--mute:#646c98;--line:#dde1fb;--acc:#5457e0;--btn:#4a5df0;--btn-t:#fff;--note:#e4f6ec;--note-t:#1b6a3c;--shadow:0 6px 20px rgba(80,90,200,.12);--page:radial-gradient(120% 55% at 50% 0%,#e8ebff,rgba(246,247,255,0) 70%),linear-gradient(#fff,#f1f3ff);color-scheme:light}
+:root[data-theme="dark"]{--bg:#060a1c;--card:rgba(20,28,70,.72);--ink:#eef0ff;--mute:#97a0d4;--line:rgba(139,140,255,.3);--acc:#8b8cff;--btn:#3b5bff;--btn-t:#fff;--note:rgba(34,197,94,.14);--note-t:#6ee7a0;--shadow:none;--page:radial-gradient(1.5px 1.5px at 12% 18%,rgba(255,255,255,0.8),transparent),radial-gradient(1px 1px at 84% 12%,rgba(255,255,255,0.7),transparent),radial-gradient(1.5px 1.5px at 72% 38%,rgba(255,255,255,0.6),transparent),radial-gradient(1px 1px at 8% 52%,rgba(255,255,255,0.6),transparent),radial-gradient(1.5px 1.5px at 90% 64%,rgba(255,255,255,0.7),transparent),radial-gradient(1px 1px at 22% 82%,rgba(255,255,255,0.5),transparent),radial-gradient(130% 70% at 50% 0%,#121846,#060a1c 72%);color-scheme:dark}
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *,*::before,*::after{box-sizing:inherit}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+html{background:var(--bg)}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:var(--page);pointer-events:none}
+body{margin:0;background:transparent;color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
 header{position:relative;text-align:center;padding:22px 16px 10px}
 .logo{font-size:26px;font-weight:800;letter-spacing:.06em;margin:0}
 .logo{display:flex;align-items:center;justify-content:center;gap:12px}.mark{width:64px;height:64px;border-radius:16px;object-fit:cover;background:#fff}.cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.post .cover{border-radius:14px}
-nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px 12px 14px;border-bottom:1px solid var(--line)}
-nav a{color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:99px;font-weight:600;font-size:15px}
+nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:6px 12px 14px;border-bottom:1px solid var(--line)}
+nav a{color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);font-weight:700;font-size:14px}
 nav a:hover,nav a:focus-visible{background:var(--card);outline:2px solid var(--acc)}
 main{max-width:680px;margin:0 auto;padding:16px}
 .note{background:var(--note);color:var(--note-t);border-radius:12px;padding:14px 16px;text-align:center;font-size:15px;margin-bottom:18px}
@@ -50,42 +51,31 @@ main{max-width:680px;margin:0 auto;padding:16px}
 .home-panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0 18px}
 .home-panel h1{font-size:24px;margin:0 0 8px}
 .home-panel p{color:var(--mute);margin:0 0 16px}
+.home-notice{margin:0 0 18px}
+.home-notice img{display:block;width:100%;height:auto;border-radius:18px;border:1px solid var(--line)}
 .home-link{display:inline-block;padding:12px 22px;border-radius:12px;background:var(--btn);color:#fff;text-decoration:none;font-weight:700}
 .drop{position:absolute;top:70px;left:14px;z-index:30;min-width:200px;padding:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .drop a{display:block;padding:12px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:600}
 .drop a:hover{background:var(--bg)}
-.pop{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:10px;background:rgba(0,0,0,.72)}
-.pop[hidden]{display:none}
-.pop-box{width:min(98vw,760px);margin:auto}
-.pop-img{position:relative}
-.pop-box img{display:block;width:100%;height:auto;border-radius:18px}
-.pop-x:focus-visible{outline:3px solid #fff}
-.pop-xhit{position:absolute;top:1%;right:1%;width:9%;height:12%;padding:0;border:0;background:transparent;cursor:pointer}
-.pop-x{position:absolute;top:-12px;right:-4px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:50%;border:2px solid #fff;background:#1b1c21;color:#fff;font-size:22px;line-height:1;cursor:pointer}
-.pop-skip{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
-.pop-skip input{flex:none;width:22px;height:22px;accent-color:#ffc400}
 footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px}
+.card,.box,.issue,.home-panel,.back,.menu-btn,.home-notice img{box-shadow:var(--shadow)}
+.tick{flex:none;width:28px;height:28px}
+.join{display:flex;align-items:center;gap:14px;padding:14px 16px;margin-bottom:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);color:var(--ink);text-decoration:none}
+.join svg{flex:none;width:44px;height:44px;border-radius:12px}
+.join b{display:block;font-size:17px}
+.join span{display:block;color:var(--mute);font-size:14px}
+.join:focus-visible{outline:2px solid var(--acc)}
 </style>
 </head>
 <body>
 <header><button type="button" class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuDrop"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
 <div class="drop" id="menuDrop" hidden>
   <a href="#/bao-loi">⚠️ Báo lỗi</a>
-</div><button type="button" class="theme-btn" id="themeBtn" aria-label="Chuyển chế độ sáng tối" title="Chuyển chế độ sáng tối">☀️</button><h1 class="logo"><img class="mark" src="img-logo.jpg" alt=""><span>VanQuang</span></h1></header>
-<nav aria-label="Menu"><a href="#/trang-chu">TRANG CHỦ</a><a href="#/mod-do">MOD ĐỒ</a><a href="#/sung">MOD SÚNG</a><a href="https://t.me/vanquangsharemod">Nhóm Telegram</a></nav>
+</div><button type="button" class="theme-btn" id="themeBtn" aria-label="Chuyển chế độ sáng tối" title="Chuyển chế độ sáng tối">☀️</button><h1 class="logo"><img class="mark" src="img-logo.jpg" alt=""><span>VanQuang</span><svg class="tick" viewBox="0 0 24 24" role="img" aria-label="Đã xác minh"><g fill="#1d9bf0"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><rect x="3.5" y="3.5" width="17" height="17" rx="4.5" transform="rotate(45 12 12)"/></g><path d="M8 12.4l2.7 2.7 5.6-5.7" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></h1></header>
+<nav aria-label="Menu"><a href="#/trang-chu">TRANG CHỦ</a><a href="#/mod-do">MOD ĐỒ</a><a href="#/sung">MOD SÚNG</a><a href="#/box-share">BOX SHARE MOD</a></nav>
 <main id="app"></main>
 <footer>© VanQuang</footer>
 
-<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="Thông báo: FFVN đã ra mắt" hidden>
-  <div class="pop-box">
-    <div class="pop-img">
-    <img src="img-thongbao.jpg" alt="Thông báo: FFVN đã ra mắt, FFTH và FFMAX sẽ bị xóa vào ngày 1/1/2027. Cách cài: Android đổi đường dẫn FFT cũ sang com.garena.ffvn, iOS dùng tài nguyên FFT cũ. Các mod cũ ADR/iOS lấy của FFTH để mod sang FFVN.">
-    <button type="button" class="pop-xhit" tabindex="-1" aria-hidden="true"></button>
-    <button type="button" class="pop-x" id="popClose" aria-label="Đóng">×</button>
-    </div>
-    <label class="pop-skip"><input type="checkbox" id="popSkip"> Không hiển thị lại trong ngày hôm nay</label>
-  </div>
-</div>
 
 <script>
 /* ===== CHỈ CẦN SỬA PHẦN NÀY ĐỂ THÊM BÀI ĐĂNG =====
@@ -680,7 +670,8 @@ const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 const thumb = p => `<img class="cover" loading="lazy" decoding="async" src="${p.img || COVER}" style="object-position:${p.pos || "center"}${p.wide ? ";aspect-ratio:auto" : ""}" alt="${esc(p.title)}">`;
 
 function landing(){
-  app.innerHTML = `<section class="home-panel"><h1>Chào mừng đến với VanQuang</h1><p>Kho chia sẻ MOD ĐỒ và MOD SÚNG Free Fire</p><a class="home-link" href="#/mod-do">Khám phá MOD ĐỒ</a></section>`;
+  app.innerHTML = `<section class="home-panel"><h1>Chào mừng đến với VanQuang</h1><p>Kho chia sẻ MOD ĐỒ và MOD SÚNG Free Fire</p><a class="home-link" href="#/mod-do">Khám phá MOD ĐỒ</a></section>
+    <figure class="home-notice"><img src="img-thongbao.jpg" alt="Thông báo: FFVN đã ra mắt, FFTH và FFMAX sẽ bị xóa vào ngày 1/1/2027. Cách cài: Android đổi đường dẫn FFT cũ sang com.garena.ffvn, iOS dùng tài nguyên FFT cũ. Các mod cũ ADR/iOS lấy của FFTH để mod sang FFVN."></figure>`;
 }
 
 function home(){
@@ -775,10 +766,18 @@ function report(){
   }));
 }
 
+function box(){
+  app.innerHTML = `<h1 class="sec">BOX SHARE MOD</h1>
+    <p class="ask">Chọn nơi bạn muốn tham gia:</p>
+    <a class="join" href="https://t.me/vanquangsharemod"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#229ed9"/><path d="M37 13.5L10.5 23.7l6.8 2.4 2.6 8.3 3.8-4.4 6.8 5 6.5-21.5z" fill="#fff"/><path d="M17.3 26.1l14.8-9.1-11 11.2-.4 5.8z" fill="#229ed9" opacity=".35"/></svg><div><b>Box Telegram</b><span>Tham gia nhóm trên Telegram</span></div></a>
+    <a class="join" href="https://zalo.me/g/v0jq6qkk6j9ooxmqdk2m"><svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#0068ff"/><text x="24" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#fff">Zalo</text></svg><div><b>Box Zalo</b><span>Tham gia nhóm trên Zalo</span></div></a>
+    <a class="back" href="#/trang-chu">← Quay lại TRANG CHỦ</a>`;
+}
+
 function route(){
   const id = location.hash.replace("#/", "");
   const p = POSTS.find(x => x.id === id);
-  id === "sung" ? guns() : id === "bao-loi" ? report() : id === "mod-do" ? home() : p ? detail(p) : landing();
+  id === "box-share" ? box() : id === "sung" ? guns() : id === "bao-loi" ? report() : id === "mod-do" ? home() : p ? detail(p) : landing();
   window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
@@ -806,28 +805,6 @@ document.addEventListener("click", e => { if (!menuDrop.contains(e.target)) setM
 document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 window.addEventListener("hashchange", () => setMenu(false));
 
-/* Pop-up thông báo: hiện mỗi lần mở web (trừ khi khách tích không hiển thị hôm nay) */
-const pop = document.getElementById("pop");
-const popClose = document.getElementById("popClose");
-const closePop = () => { pop.hidden = true; document.body.style.overflow = ""; };
-const openPop = () => { pop.hidden = false; document.body.style.overflow = "hidden"; popClose.focus(); };
-popClose.addEventListener("click", closePop);
-document.querySelectorAll(".pop-xhit").forEach(b => b.addEventListener("click", closePop));
-pop.addEventListener("click", e => { if (e.target === pop) closePop(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) closePop(); });
-const popKey = (() => { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); })();
-const popSkip = document.getElementById("popSkip");
-popSkip.addEventListener("change", () => {
-  try { popSkip.checked ? localStorage.setItem("pop_skip_tb", popKey) : localStorage.removeItem("pop_skip_tb"); } catch (e) {}
-  popSkipped = popSkip.checked;
-});
-let popSkipped = false;
-try { popSkipped = localStorage.getItem("pop_skip_tb") === popKey; } catch (e) {}
-if (!popSkipped && (!location.hash || location.hash === "#/" || location.hash === "#/trang-chu")) openPop();
-window.addEventListener("hashchange", () => {
-  const onHome = !location.hash || location.hash === "#/" || location.hash === "#/trang-chu";
-  if (onHome && !popSkipped && pop.hidden) openPop();
-});
 /* Gỡ bản app cũ (nếu máy khách đã cài) để không bị lỗi khi các file app đã xóa */
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
