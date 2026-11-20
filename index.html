@@ -48,106 +48,33 @@ main{max-width:680px;margin:0 auto;padding:16px}
 .drop{position:absolute;top:70px;left:14px;z-index:30;min-width:200px;padding:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .drop a{display:block;padding:12px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:600}
 .drop a:hover{background:var(--bg)}
-.pop{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:16px;background:rgba(0,0,0,.72)}
+.pop{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:10px;background:rgba(0,0,0,.72)}
 .pop[hidden]{display:none}
-.pop-box{width:min(92vw,420px);margin:auto}
+.pop-box{width:min(98vw,760px);margin:auto}
 .pop-img{position:relative}
 .pop-box img{display:block;width:100%;height:auto;border-radius:18px}
-.pop-go{position:absolute;left:20%;top:60%;width:60%;height:11.5%;border-radius:999px}
-.pop-go:focus-visible,.pop-x:focus-visible{outline:3px solid #fff}
+.pop-x:focus-visible{outline:3px solid #fff}
+.pop-xhit{position:absolute;top:1%;right:1%;width:9%;height:12%;padding:0;border:0;background:transparent;cursor:pointer}
 .pop-x{position:absolute;top:-12px;right:-4px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:50%;border:2px solid #fff;background:#1b1c21;color:#fff;font-size:22px;line-height:1;cursor:pointer}
 .pop-skip{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
 .pop-skip input{flex:none;width:22px;height:22px;accent-color:#ffc400}
 footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px}
-
-/* ===== Lucian UX/UI Prompt #021: Day–night sky switch (Top-Right Header) ===== */
-.u021{position:absolute;top:14px;right:14px;width:96px;height:48px;display:flex;align-items:center;justify-content:center;z-index:20;
-  --ux-ink:var(--ink);
-  --ux-ink-3:var(--mute);
-  --ux-accent:var(--acc);
-}
-.u021-scale{transform:scale(0.428);transform-origin:center;width:224px;height:94px;flex:none;display:flex;align-items:center;justify-content:center}
-.u021 *,.u021 *::before,.u021 *::after{box-sizing:border-box}
-:where(.u021) button{cursor:pointer;font:inherit;color:inherit}
-.u021 :focus-visible{outline:2px solid var(--ux-accent);outline-offset:3px}
-
-.u021-sw{position:relative;width:224px;height:94px;border:0;padding:0;border-radius:999px;overflow:hidden;isolation:isolate;
-  background:linear-gradient(180deg,#5DB7FF,#9ED8FF);box-shadow:inset 0 4px 10px rgba(0,30,80,.28),inset 0 -2px 4px rgba(255,255,255,.4),0 18px 34px -18px rgba(40,110,200,.7);transition:box-shadow .8s cubic-bezier(.2,.8,.2,1)}
-.u021-sw::before{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#141A3A,#232C5C);opacity:0;transition:opacity .8s cubic-bezier(.2,.8,.2,1)}
-.u021-sw:focus-visible{outline:2px solid var(--ux-accent);outline-offset:5px}
-.u021.is-night .u021-sw::before{opacity:1}
-.u021.is-night .u021-sw{box-shadow:inset 0 4px 10px rgba(0,0,0,.5),inset 0 -2px 4px rgba(255,255,255,.08),0 18px 34px -18px rgba(20,24,70,.9)}
-
-.u021-halo{position:absolute;z-index:1;left:47px;top:47px;width:0;height:0;transition:transform .9s cubic-bezier(.34,1.45,.64,1)}
-.u021-halo i{position:absolute;border-radius:50%;background:rgba(255,255,255,.12)}
-.u021-halo i:nth-child(1){width:130px;height:130px;margin:-65px}
-.u021-halo i:nth-child(2){width:176px;height:176px;margin:-88px}
-.u021-halo i:nth-child(3){width:222px;height:222px;margin:-111px}
-.u021.is-night .u021-halo{transform:translateX(130px)}
-.u021-knob{position:absolute;z-index:3;left:8px;top:8px;width:78px;height:78px;border-radius:50%;overflow:hidden;
-  background:radial-gradient(circle at 35% 30%,#FFF1A8,#FFD23F 45%,#F8A91E);box-shadow:0 6px 14px -4px rgba(140,80,0,.5),inset -4px -6px 10px rgba(200,110,0,.35),inset 4px 4px 8px rgba(255,255,255,.5);
-  transition:transform .9s cubic-bezier(.34,1.45,.64,1)}
-.u021-moon{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F4F6FB,#C9CFDD 60%,#A9B0C2);opacity:0;transform:translateX(100%);transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .4s cubic-bezier(.2,.8,.2,1)}
-.u021-moon i{position:absolute;border-radius:50%;background:#A3AABC;box-shadow:inset 1px 2px 2px rgba(0,0,0,.18)}
-.u021-moon i:nth-child(1){left:20px;top:16px;width:20px;height:20px}
-.u021-moon i:nth-child(2){left:46px;top:40px;width:14px;height:14px}
-.u021-moon i:nth-child(3){left:24px;top:48px;width:9px;height:9px}
-.u021.is-night .u021-knob{transform:translateX(130px) rotate(200deg)}
-.u021.is-night .u021-moon{opacity:1;transform:none}
-.u021-clouds{position:absolute;z-index:2;inset:0;transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .6s cubic-bezier(.2,.8,.2,1)}
-.u021-clouds i{position:absolute;border-radius:999px;background:#fff}
-.u021-clouds i:nth-child(1){right:-10px;bottom:-18px;width:120px;height:56px;box-shadow:-46px 8px 0 -6px #fff,-80px 18px 0 -10px #fff}
-.u021-clouds i:nth-child(2){right:20px;bottom:-30px;width:96px;height:52px;background:#E3F1FF;box-shadow:-44px 6px 0 -8px #E3F1FF;z-index:-1}
-.u021.is-night .u021-clouds{transform:translateY(80px);opacity:0}
-.u021-stars{position:absolute;z-index:1;inset:0;opacity:0;transform:translateY(-30px);transition:transform .8s cubic-bezier(.2,.8,.2,1),opacity .6s cubic-bezier(.2,.8,.2,1)}
-.u021-stars i{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff;box-shadow:0 0 6px #fff;animation:u021-tw 2.4s ease-in-out infinite}
-.u021.is-night .u021-stars{opacity:1;transform:none}
-@keyframes u021-tw{50%{opacity:.3;transform:scale(.6)}}
-.u021-lab{display:none;margin:0;position:relative;width:200px;height:24px;overflow:hidden;text-align:center;font-size:16px;font-weight:720;letter-spacing:-.02em;color:var(--ux-ink)}
-.u021-lab span{position:absolute;left:0;right:0;top:0;line-height:24px;transition:transform .55s cubic-bezier(.34,1.45,.64,1),opacity .3s cubic-bezier(.2,.8,.2,1)}
-.u021-lab small{font-weight:550;color:var(--ux-ink-3);margin-left:6px}
-.u021-lab span+span{transform:translateY(100%);opacity:0}
-.u021.is-night .u021-lab span:first-child{transform:translateY(-100%);opacity:0}
-.u021.is-night .u021-lab span+span{transform:none;opacity:1}
-
-@media (prefers-reduced-motion:reduce){
-  .u021,.u021 *,.u021 *::before,.u021 *::after{
-    animation-duration:.001ms!important;animation-iteration-count:1!important;
-    transition-duration:.001ms!important;scroll-behavior:auto!important;
-  }
-}
 </style>
 </head>
 <body>
 <header><button type="button" class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuDrop"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
 <div class="drop" id="menuDrop" hidden>
-  <a href="https://vanquangmod.github.io/VanQuang-mod/confirm-event.html">Sự kiện 🎁</a>
   <a href="#/bao-loi">⚠️ Báo lỗi</a>
-</div><h1 class="logo"><img class="mark" src="img-logo.jpg" alt=""><span>VanQuang</span></h1>
-<!-- Day-Night Sky Switch Component (Prompt #021) -->
-<div class="ux u021" id="skySwitchRoot">
-  <div class="u021-scale">
-    <button class="u021-sw" type="button" role="switch" aria-checked="false" aria-label="Night sky mode">
-      <span class="u021-halo" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="u021-stars" aria-hidden="true">
-        <i style="left:30px;top:20px"></i><i style="left:58px;top:56px;animation-delay:-.6s;width:3px;height:3px"></i><i style="left:86px;top:26px;animation-delay:-1.2s"></i><i style="left:44px;top:72px;animation-delay:-1.8s;width:3px;height:3px"></i><i style="left:110px;top:60px;animation-delay:-.9s;width:2px;height:2px"></i><i style="left:20px;top:46px;animation-delay:-1.5s;width:2px;height:2px"></i>
-      </span>
-      <span class="u021-clouds" aria-hidden="true"><i></i><i></i></span>
-      <span class="u021-knob" aria-hidden="true"><span class="u021-moon"><i></i><i></i><i></i></span></span>
-    </button>
-  </div>
-</div>
-</header>
+</div><h1 class="logo"><img class="mark" src="img-logo.jpg" alt=""><span>VanQuang</span></h1></header>
 <nav aria-label="Menu"><a href="#/">MOD ĐỒ</a><a href="#/sung">MOD SÚNG</a><a href="https://t.me/vanquangsharemod">Nhóm Telegram</a></nav>
-
 <main id="app"></main>
 <footer>© VanQuang</footer>
 
-<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="Sự kiện Bốc Mã Số may mắn nhận giải" hidden>
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="Thông báo: FFVN đã ra mắt" hidden>
   <div class="pop-box">
     <div class="pop-img">
-    <img src="img-sukien.jpg" alt="Tham gia sự kiện: Bốc Mã Số may mắn nhận giải">
-    <a class="pop-go" href="https://vanquangmod.github.io/VanQuang-mod/confirm-event.html" aria-label="Tham gia ngay"></a>
+    <img src="img-thongbao.jpg" alt="Thông báo: FFVN đã ra mắt, FFTH và FFMAX sẽ bị xóa vào ngày 1/1/2027. Cách cài: Android đổi đường dẫn FFT cũ sang com.garena.ffvn, iOS dùng tài nguyên FFT cũ. Các mod cũ ADR/iOS lấy của FFTH để mod sang FFVN.">
+    <button type="button" class="pop-xhit" tabindex="-1" aria-hidden="true"></button>
     <button type="button" class="pop-x" id="popClose" aria-label="Đóng">×</button>
     </div>
     <label class="pop-skip"><input type="checkbox" id="popSkip"> Không hiển thị lại trong ngày hôm nay</label>
@@ -155,6 +82,9 @@ footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px
 </div>
 
 <script>
+/* ===== CHỈ CẦN SỬA PHẦN NÀY ĐỂ THÊM BÀI ĐĂNG =====
+   Mỗi bài là 1 khối { ... }. Copy 1 khối rồi đổi nội dung.
+   link: dán đường link tải của bạn vào (thay dấu #) */
 const COVER = "img-cover.jpg";
 const COVER2 = "img-cover2.jpg";
 const COVER3 = "img-cover3.jpg";
@@ -772,7 +702,10 @@ function guns(){
     </a>`).join("") : `<p class="hint">Chưa có bài.</p>`) + `<a class="back" href="#/">← Quay lại MOD ĐỒ</a>`;
 }
 
-/* ===== BÁO LỖI ===== */
+/* ===== BÁO LỖI =====
+   DB_URL: để trống thì số lượt báo lỗi chỉ lưu trên từng máy.
+   Dán link Firebase vào đây (ví dụ "https://ten-du-an-default-rtdb.firebaseio.com")
+   thì số lượt báo lỗi sẽ chung cho tất cả mọi người. */
 const DB_URL = "https://vanquang-77dbc-default-rtdb.asia-southeast1.firebasedatabase.app";
 const ZALO = "https://zaloapp.com/qr/p/p8pa8dlri07z?src=qr";
 const ISSUES = [
@@ -821,7 +754,7 @@ function report(){
     const k = b.dataset.k;
     let last = 0;
     try { last = +localStorage.getItem("bl_t_" + k) || 0; } catch (e) {}
-    if (Date.now() - last > 864e5) {
+    if (Date.now() - last > 864e5) {   /* mỗi máy chỉ tính 1 lượt/mục mỗi 24 giờ */
       await store.add(k);
       try { localStorage.setItem("bl_t_" + k, String(Date.now())); } catch (e) {}
       await showCount(k);
@@ -840,7 +773,7 @@ function route(){
 }
 window.addEventListener("hashchange", route);
 
-/* Menu 3 gạch */
+/* Menu 3 gạch: Báo lỗi */
 const menuBtn = document.getElementById("menuBtn");
 const menuDrop = document.getElementById("menuDrop");
 const setMenu = open => { menuDrop.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
@@ -849,61 +782,28 @@ document.addEventListener("click", e => { if (!menuDrop.contains(e.target)) setM
 document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 window.addEventListener("hashchange", () => setMenu(false));
 
-/* Pop-up sự kiện */
+/* Pop-up thông báo: hiện mỗi lần mở web (trừ khi khách tích không hiển thị hôm nay) */
 const pop = document.getElementById("pop");
 const popClose = document.getElementById("popClose");
 const closePop = () => { pop.hidden = true; document.body.style.overflow = ""; };
 const openPop = () => { pop.hidden = false; document.body.style.overflow = "hidden"; popClose.focus(); };
 popClose.addEventListener("click", closePop);
+document.querySelectorAll(".pop-xhit").forEach(b => b.addEventListener("click", closePop));
 pop.addEventListener("click", e => { if (e.target === pop) closePop(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) closePop(); });
 const popKey = (() => { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); })();
 const popSkip = document.getElementById("popSkip");
 popSkip.addEventListener("change", () => {
-  try { popSkip.checked ? localStorage.setItem("pop_skip", popKey) : localStorage.removeItem("pop_skip"); } catch (e) {}
+  try { popSkip.checked ? localStorage.setItem("pop_skip_tb", popKey) : localStorage.removeItem("pop_skip_tb"); } catch (e) {}
 });
 let popSkipped = false;
-try { popSkipped = localStorage.getItem("pop_skip") === popKey; } catch (e) {}
+try { popSkipped = localStorage.getItem("pop_skip_tb") === popKey; } catch (e) {}
 if (!popSkipped) openPop();
-
+/* Gỡ bản app cũ (nếu máy khách đã cài) để không bị lỗi khi các file app đã xóa */
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
   if (window.caches) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
 }
-
-/* ===== DAY-NIGHT SKY SWITCH (021) INITIALIZATION ===== */
-(function () {
-  const root = document.getElementById('skySwitchRoot');
-  if (!root) return;
-  const sw = root.querySelector('.u021-sw');
-
-  let savedTheme = null;
-  try { savedTheme = localStorage.getItem('vq_theme'); } catch (e) {}
-  if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const isNight = currentTheme === 'dark' || (!currentTheme && prefersDark);
-
-  if (isNight) {
-    root.classList.add('is-night');
-    sw.setAttribute('aria-checked', 'true');
-  }
-
-  sw.addEventListener('click', function () {
-    const night = !root.classList.contains('is-night');
-    root.classList.toggle('is-night', night);
-    sw.setAttribute('aria-checked', String(night));
-
-    if (night) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      try { localStorage.setItem('vq_theme', 'dark'); } catch (e) {}
-    } else {
-      document.documentElement.setAttribute('data-theme', 'light');
-      try { localStorage.setItem('vq_theme', 'light'); } catch (e) {}
-    }
-  });
-})();
-
 route();
 </script>
 </body>
