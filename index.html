@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VanQuang</title>
+<style>
+:root{--bg:#f3f1ec;--card:#fff;--ink:#17181c;--mute:#6b6e76;--line:#dcd8ce;--acc:#e4372c;--btn:#1f4fe0;--btn-t:#fff;--note:#e3efe6;--note-t:#1d5a34;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121316;--card:#1b1c21;--ink:#f2f2f4;--mute:#9a9da6;--line:#2c2e35;--acc:#ff5a4d;--btn:#2d5cf0;--note:#10302a;--note-t:#7fe0a8;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#070d1c;--card:#0d172b;--ink:#f2f5ff;--mute:#9ba8c2;--line:#1b2a45;--acc:#ff5a4d;--btn:#1458a8;--note:#0d342e;--note-t:#80e6b2;color-scheme:dark}
+:root[data-theme="light"]{--bg:#f7f8fc;--card:#fff;--ink:#171b2b;--mute:#6d7485;--line:#e2e6ef;--acc:#e4372c;--btn:#1f4fe0;--btn-t:#fff;--note:#e3efe6;--note-t:#1d5a34;color-scheme:light}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+header{position:relative;text-align:center;padding:22px 16px 10px}
+.logo{font-size:26px;font-weight:800;letter-spacing:.06em;margin:0}
+.logo{display:flex;align-items:center;justify-content:center;gap:12px}.mark{width:64px;height:64px;border-radius:16px;object-fit:cover;background:#fff}.cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.post .cover{border-radius:14px}
+nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:6px 12px 14px;border-bottom:1px solid var(--line)}
+nav a{color:var(--ink);text-decoration:none;padding:8px 14px;border-radius:99px;font-weight:600;font-size:15px}
+nav a:hover,nav a:focus-visible{background:var(--card);outline:2px solid var(--acc)}
+main{max-width:680px;margin:0 auto;padding:16px}
+.note{background:var(--note);color:var(--note-t);border-radius:12px;padding:14px 16px;text-align:center;font-size:15px;margin-bottom:18px}
+.card{display:block;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:16px;text-decoration:none;color:inherit}
+.card:focus-visible{outline:2px solid var(--acc)}
+.thumb{aspect-ratio:16/9;display:flex;align-items:flex-end;padding:14px;color:#fff;font-weight:800;font-size:22px;line-height:1.1;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.card h2{font-size:18px;margin:14px 16px 2px;line-height:1.3}
+.card p{margin:0 16px 14px;color:var(--mute);font-size:14px}
+.post h1{font-size:22px;line-height:1.3;margin:0 0 12px}
+.post .thumb{border-radius:14px}
+.date{color:var(--mute);font-size:14px;margin:12px 0}
+.info{list-style:none;padding:0;margin:0 0 18px}
+.info li{padding:4px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.box h3{margin:0 0 10px;font-size:17px}
+.dl{display:block;text-align:center;background:var(--btn);color:var(--btn-t);text-decoration:none;font-weight:700;padding:14px;border-radius:12px;margin-top:10px}
+.dl:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.back{display:inline-block;margin:6px 0 18px;color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--card);padding:10px 16px;border-radius:99px;font-weight:600}
+.sec{font-size:22px;margin:0 0 16px}.hint{color:var(--mute);font-size:14px;text-align:center;margin:12px 0}
+.ask{margin:0 0 12px;font-weight:600}
+.issue{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:10px;font:inherit;cursor:pointer}
+.issue:focus-visible{outline:2px solid var(--acc)}
+.issue b{flex:none;color:var(--acc);font-size:14px}
+.contact{text-align:center;margin-top:16px}
+.zalo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-weight:700}
+.zalo svg{width:48px;height:48px;border-radius:12px}
+.menu-btn{position:absolute;top:14px;left:14px;display:flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;cursor:pointer}
+.menu-btn:focus-visible,.drop a:focus-visible,.theme-btn:focus-visible{outline:2px solid var(--acc)}
+.theme-btn{position:absolute;top:14px;right:14px;display:flex;align-items:center;justify-content:center;width:48px;height:48px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--ink);font-size:23px;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.08)}
+.home-panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 18px;text-align:center;margin:8px 0 18px}
+.home-panel h1{font-size:24px;margin:0 0 8px}
+.home-panel p{color:var(--mute);margin:0 0 16px}
+.home-link{display:inline-block;padding:12px 22px;border-radius:12px;background:var(--btn);color:#fff;text-decoration:none;font-weight:700}
+.drop{position:absolute;top:70px;left:14px;z-index:30;min-width:200px;padding:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.drop a{display:block;padding:12px 14px;border-radius:10px;color:var(--ink);text-decoration:none;font-weight:600}
+.drop a:hover{background:var(--bg)}
+.pop{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;overflow-y:auto;padding:10px;background:rgba(0,0,0,.72)}
+.pop[hidden]{display:none}
+.pop-box{width:min(98vw,760px);margin:auto}
+.pop-img{position:relative}
+.pop-box img{display:block;width:100%;height:auto;border-radius:18px}
+.pop-x:focus-visible{outline:3px solid #fff}
+.pop-xhit{position:absolute;top:1%;right:1%;width:9%;height:12%;padding:0;border:0;background:transparent;cursor:pointer}
+.pop-x{position:absolute;top:-12px;right:-4px;display:flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:50%;border:2px solid #fff;background:#1b1c21;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.pop-skip{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:14px;color:#fff;font-size:15px;font-weight:600;cursor:pointer}
+.pop-skip input{flex:none;width:22px;height:22px;accent-color:#ffc400}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:20px 16px 30px}
+</style>
+</head>
+<body>
+<header><button type="button" class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false" aria-controls="menuDrop"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+<div class="drop" id="menuDrop" hidden>
+  <a href="#/bao-loi">⚠️ Báo lỗi</a>
+</div><button type="button" class="theme-btn" id="themeBtn" aria-label="Chuyển chế độ sáng tối" title="Chuyển chế độ sáng tối">☀️</button><h1 class="logo"><img class="mark" src="img-logo.jpg" alt=""><span>VanQuang</span></h1></header>
+<nav aria-label="Menu"><a href="#/trang-chu">TRANG CHỦ</a><a href="#/mod-do">MOD ĐỒ</a><a href="#/sung">MOD SÚNG</a><a href="https://t.me/vanquangsharemod">Nhóm Telegram</a></nav>
+<main id="app"></main>
+<footer>© VanQuang</footer>
+
+<div class="pop" id="pop" role="dialog" aria-modal="true" aria-label="Thông báo: FFVN đã ra mắt" hidden>
+  <div class="pop-box">
+    <div class="pop-img">
+    <img src="img-thongbao.jpg" alt="Thông báo: FFVN đã ra mắt, FFTH và FFMAX sẽ bị xóa vào ngày 1/1/2027. Cách cài: Android đổi đường dẫn FFT cũ sang com.garena.ffvn, iOS dùng tài nguyên FFT cũ. Các mod cũ ADR/iOS lấy của FFTH để mod sang FFVN.">
+    <button type="button" class="pop-xhit" tabindex="-1" aria-hidden="true"></button>
+    <button type="button" class="pop-x" id="popClose" aria-label="Đóng">×</button>
+    </div>
+    <label class="pop-skip"><input type="checkbox" id="popSkip"> Không hiển thị lại trong ngày hôm nay</label>
+  </div>
+</div>
+
+<script>
+/* ===== CHỈ CẦN SỬA PHẦN NÀY ĐỂ THÊM BÀI ĐĂNG =====
+   Mỗi bài là 1 khối { ... }. Copy 1 khối rồi đổi nội dung.
+   link: dán đường link tải của bạn vào (thay dấu #) */
+const COVER = "img-cover.jpg";
+const COVER2 = "img-cover2.jpg";
+const COVER3 = "img-cover3.jpg";
+const COVER4 = "img-cover4.jpg";
+const COVER5 = "img-cover5.jpg";
+const COVER6 = "img-cover6.jpg";
+const COVER7 = "img-cover7.jpg";
+const COVER8 = "img-cover8.jpg";
+const COVERG = "img-coverg.jpg";
+const COVERG2 = "img-coverg2.jpg";
+const COVERG3 = "img-coverg3.jpg";
+const COVERG4 = "img-coverg4.jpg";
+const COVERG5 = "img-coverg5.jpg";
+const COVERG6 = "img-coverg6.jpg";
+const COVERG7 = "img-coverg7.jpg";
+const COVERG8 = "img-coverg8.jpg";
+const COVERG9 = "img-coverg9.jpg";
+const COVERG10 = "img-coverg10.jpg";
+const COVERG11 = "img-coverg11.jpg";
+const COVERD1 = "img-coverd1.jpg";
+const COVERD2 = "img-coverd2.jpg";
+const COVERG12 = "img-coverg12.jpg";
+const COVERG13 = "img-coverg13.jpg";
+const COVERD3 = "img-coverd3.jpg";
+const COVERD4 = "img-coverd4.jpg";
+const COVERD5 = "img-coverd5.jpg";
+const COVERG14 = "img-coverg14.jpg";
+const COVERD6 = "img-coverd6.jpg";
+const COVERD7 = "img-coverd7.jpg";
+const COVERG15 = "img-coverg15.jpg";
+const COVERD8 = "img-coverd8.jpg";
+const COVERG16 = "img-coverg16.jpg";
+const COVERG17 = "img-coverg17.jpg";
+const POSTS = [
+  {
+    id: "m1887-longtoc-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Long Tộc",
+    char: "Súng: M1887",
+    date: "11/11/2026",
+    img: COVERG16,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/ZesY7",
+      "FF Max": "https://link4m.net/yJJXZDR4"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/qu6hO8Bs",
+      "FF Max": "https://link4m.net/TIGIfiW"
+    }
+  },
+  {
+    id: "m1887-shiba-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Shiba",
+    char: "Súng: M1887",
+    date: "11/11/2026",
+    img: COVERG17,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/SEGDH",
+      "FF Max": "https://link4m.org/Qat7Ok"
+    },
+    ios: {
+      "FF Thường": "https://link4m.org/EERo0wd3",
+      "FF Max": "https://link4m.org/mCdJ1u"
+    }
+  },
+  {
+    id: "ignis-daulau-ob55",
+    title: "MOD SKIN FF OB55 - Ignis Áo Khoác Đầu Lâu Quần Jean Rách",
+    char: "Nhân vật: Ignis",
+    date: "11/11/2026",
+    img: COVERD8,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/7lo536gig71t2co/VQ7+ADR+FFTH++IGNIS.zip/file",
+      "FF Max": "https://www.mediafire.com/file/y5dwxtluk3td2hj/VQ7+ADR+FFM+IGNIS.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/m6a26wswvvk51ti/VQ7+IOS+FFTH++IGNIS.zip/file",
+      "FF Max": "https://www.mediafire.com/file/8vszxfh0548zyjj/VQ7++IOS+FFM+YG55.zip/file"
+    }
+  },
+  {
+    id: "m1014-shiba-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1014 Phong Xà Thành M1014 Shiba",
+    char: "Súng: M1014",
+    date: "09/11/2026",
+    img: COVERG15,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/DIX9V",
+      "FF Max": "https://link4m.org/gbQ9c"
+    },
+    ios: {
+      "FF Thường": "https://link4m.org/FVK70",
+      "FF Max": "https://link4m.org/EUkNkXn1"
+    }
+  },
+  {
+    id: "alok-bongda-so9-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Áo Bóng Đá Số 9 Lửa Đen Cam",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "08/11/2026",
+    img: COVERD6,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/ozb8y1cci1al0ac/VQ5+ALOK+THỨC+TỈNH+ADR+FFTH+JA22.zip/file",
+      "FF Max": "https://www.mediafire.com/file/0cuwamfpw1r8rh1/VQ5+ALOK+THỨC+TỈNH+ADR+FFM+GF62.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/dj1fnoh863prvip/VQ5+ALOK+THỨC+TỈNH+IOS+FFTH+BP97.zip/file",
+      "FF Max": "https://www.mediafire.com/file/hp64jpgcla08kk3/VQ5+ALOK+THỨC+TỈNH+IOS+FFM+RK94.zip/file"
+    }
+  },
+  {
+    id: "ignis-giap-ob55",
+    title: "MOD SKIN FF OB55 - Ignis Giáp Xanh Trắng Quần Đen Hiệu Ứng Lửa",
+    char: "Nhân vật: Ignis",
+    date: "08/11/2026",
+    img: COVERD7,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/ao8iuhnawr50q04/VQ6+ADR+FFTH+OB55_Ignis_157637.zip/file",
+      "FF Max": "https://www.mediafire.com/file/17c8sqloqhusw21/VQ6+ADR+FFMAX+OB55_Ignis_406824.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/h57332rhf0qb611/VQ6+IOS+FFTH+OB55_Ignis_203926.zip/file",
+      "FF Max": "https://www.mediafire.com/file/zs23024l188d95n/VQ6++IOS+FFMAX+OB55_Ignis_988089.zip/file"
+    }
+  },
+  {
+    id: "hellokitty-ob55",
+    title: "MOD SKIN FF OB55 - Set Đồ Hello Kitty Hồng",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "08/11/2026",
+    img: COVERD5,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/4smfrjvuutdahkd/VQ4+ALOK+THỨC+TỈNH+ADR+FFTH+TV67.zip/file",
+      "FF Max": "https://www.mediafire.com/file/0fvnfq50gc5vv7r/VQ4+ALOK+THỨC+TỈNH+ADR+FFM+YK58.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/umi0tlx1jong716/VQ4+ALOK+THỨC+TỈNH+IOS+FFTH+BA73.zip/file",
+      "FF Max": "https://www.mediafire.com/file/y2ed8rmxb2games/VQ4+ALOK+THỨC+TỈNH+IOS+FFM+QN95.zip/file"
+    }
+  },
+  {
+    id: "aug-nangcap-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - AUG Phong Xà Thành AUG Nâng Cấp Lv7 Full Hiệu Ứng",
+    char: "Súng: AUG",
+    date: "08/11/2026",
+    img: COVERG14,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/isaUU",
+      "FF Max": "https://link4m.net/pFk8HJcF"
+    },
+    ios: {
+      "FF Thường": "https://link4m.org/9LNh9lr",
+      "FF Max": "https://link4m.net/RbAzFiMx"
+    }
+  },
+  {
+    id: "alok-thoblack-ob55",
+    title: "MOD SKIN FF OB55 - Đầu Thỏ Black + Quái Nhân Hư Không Black",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "06/11/2026",
+    img: COVERD3,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/6a8cvxyrtoa96lv/VANQUANG3_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFTH_RJ27.zip/file",
+      "FF Max": "https://www.mediafire.com/file/pl1bxasm1mxy16z/VANQUANG3_Z_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFM_WT92.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/vdg6s6pjjuz54st/VANQUANG3_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFTH_WC79.zip/file",
+      "FF Max": "https://www.mediafire.com/file/ez2rsjx38rpjkor/VANQUANG3_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFM_CM72.zip/file"
+    }
+  },
+  {
+    id: "alok-hukhong-tim-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Đầu Trắng Nón Nâu + Hiệu Ứng Hư Không Tím",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "06/11/2026",
+    img: COVERD4,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/ve23i3wz29o6yno/ModFreeFireBOT_Skin_FFT_ANDROID_1792851329_ec5138e3.zip/file?dkey=q3t9aaxqgch&r=1587",
+      "FF Max": "https://www.mediafire.com/file/gfonvvt6hymqlos/ModFreeFireBOT_Skin_FFM_ANDROID_1792852826_d120989c.zip/file?dkey=b501d6rcg6l&r=1321"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/xrfqnefgoqontj2/ModFreeFireBOT_Skin_FFT_IOS_1792853141_20589df6.zip/file?dkey=t226jchdrue&r=1365",
+      "FF Max": "https://www.mediafire.com/file/ost7br1hevencrg/ModFreeFireBOT_Skin_FFM_IOS_1792853644_bc57164b.zip/file?dkey=38nrm3cuqvd&r=201"
+    }
+  },
+  {
+    id: "m1887-phonglon-ob55",
+    cat: "sung",
+    note: "Link No Vượt",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Phóng Lợn",
+    char: "Súng: M1887",
+    date: "04/11/2026",
+    img: COVERG13,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/216187wpdum6du0/VQUANG_M1887_PH%25C3%2593NG_L%25E1%25BB%25A2N_ADR_FFTH_OB55.zip/file",
+      "FF Max": "https://www.mediafire.com/file/5elxailnz4n48m6/VQUANG_M1887_PH%25C3%2593NG_L%25E1%25BB%25A2N_ADR_FFM_OB55.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/e4cma2ai6ieu714/VQUANG_M1887_PH%25C3%2593NG_L%25E1%25BB%25A2N_IOS_FFTHOB55.zip/file",
+      "FF Max": "https://www.mediafire.com/file/857t3qlw15ma8ok/VQUANG_M1887_PH%25C3%2593NG_L%25E1%25BB%25A2N_IOS_FFMAX_OB55.zip/file"
+    }
+  },
+  {
+    id: "awm-hoabang-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - AWM Ma Ảnh Cực Quang Thành AWM Hỏa Băng Full Hiệu Ứng",
+    char: "Súng: AWM",
+    date: "31/10/2026",
+    img: COVERG12,
+    wide: true,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/TB1cm",
+      "FF Max": "https://link4m.net/1DO3G"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/adiyUbnk",
+      "FF Max": "https://link4m.org/5AAyy"
+    }
+  },
+  {
+    id: "itachi-ob55",
+    title: "MOD SKIN FF OB55 - Áo Itachi Full Hiệu Ứng VIP",
+    char: "Nhân vật: Ignis",
+    date: "31/10/2026",
+    img: COVERD1,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/6k0bz7el29wcfr8/M+DUY+MOD+FFT+ADR.ZIP/file?dkey=y8wf04tcw0z&r=1141",
+      "FF Max": "https://www.mediafire.com/file/0cnnu0ye49vao5e/M+DUY+MOD+FFMAX+ADR.ZIP/file?dkey=r35uyi2d5ls&r=939"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/r24e91czztrh5th/M+DUY+MOD+FFT+IOS.ZIP/file?dkey=ex2px6s4jsx&r=216",
+      "FF Max": "https://www.mediafire.com/file/17n8jor5busxu26/M+DUY+MOD+FFMAX+IOS.ZIP/file?dkey=e8swflbh6av&r=1821"
+    }
+  },
+  {
+    id: "bao-hong-ob55",
+    title: "MOD SKIN FF OB55 - Skin Báo Hồng VIP",
+    char: "Nhân vật: Dimitri",
+    date: "31/10/2026",
+    img: COVERD2,
+    pos: "50% 10%",
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/lesea674514bcn4/VQ_DIMITRI_ADR_FFTH_B%25C3%2581O_H%25E1%25BB%2592NG_.zip/file",
+      "FF Max": "https://www.mediafire.com/file/whjv6y3fnxrbxgj/VQ_DIMITRI_ADR_FFM_B%25C3%2581O_H%25E1%25BB%2592NG_.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/un6132wqnx2pzs8/VQ_DIMITRI_FFTH_IOS_8863EA.zip/file",
+      "FF Max": "https://www.mediafire.com/file/zaekkryzb1f8160/VQ_DIMITRI_FFMAX_IOS_455142.zip/file"
+    }
+  },
+  {
+    id: "m590-metalgarurumon-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M590 Phong Xà Thành M590 Sức Mạnh MetalGarurumon Full Hiệu Ứng Có Icon",
+    char: "Súng: M590",
+    date: "31/10/2026",
+    img: COVERG11,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/Av5R2qG",
+      "FF Max": "https://link4m.net/qIVnd"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/nNglJsKh",
+      "FF Max": "https://link4m.net/Jl1pitDC"
+    }
+  },
+  {
+    id: "ak-rongxanh-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - AK Thợ Săn Đầu Lâu Thành Skin AK Rồng Xanh Lv7 Full Hiệu Ứng",
+    char: "Súng: AK47",
+    date: "30/10/2026",
+    img: COVERG10,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/Qv5W5EB",
+      "FF Max": "https://link4m.org/863hDe"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/WJkbar",
+      "FF Max": "https://link4m.org/nF2XOoH"
+    }
+  },
+  {
+    id: "parafal-cuonglong-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - Parafal Phong Xà Thành Parafal Cuồng Long Lv7 Full Hiệu Ứng VIP",
+    char: "Súng: Parafal",
+    date: "29/10/2026",
+    img: COVERG9,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/8JwT0",
+      "FF Max": "https://link4m.net/X9vVA5"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/ZMWNN",
+      "FF Max": "https://link4m.net/u6c1C4"
+    }
+  },
+  {
+    id: "m60-satthan-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M60 Phong Xà Thành M60 Sát Thần Săn Mộng Lv7 Full Hiệu Ứng VIP",
+    char: "Súng: M60",
+    date: "28/10/2026",
+    img: COVERG8,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/LqBhLF",
+      "FF Max": "https://link4m.net/6GWFRY"
+    },
+    ios: {
+      "FF Thường": "https://link4m.org/fzrhF",
+      "FF Max": "https://link4m.org/zEKLe"
+    }
+  },
+  {
+    id: "trogon-daoquansu-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - Trogon Phong Xà Thành Trogon Đảo Quân Sự VIP Full Hiệu Ứng",
+    char: "Súng: Trogon",
+    date: "28/10/2026",
+    img: COVERG7,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.org/ZzDyMY",
+      "FF Max": "https://link4m.net/RYwlM"
+    },
+    ios: {
+      "FF Thường": "https://link4m.org/2qYMYa",
+      "FF Max": "https://link4m.org/kCcgyJiY"
+    }
+  },
+  {
+    id: "mp5-lv7-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - MP5 Chinh Phục Thành MP5 Lv7 VIP Full Hiệu Ứng",
+    char: "Súng: MP5",
+    date: "27/10/2026",
+    img: COVERG6,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/clgnR",
+      "FF Max": "https://link4m.org/tkGKj8"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/89dzXT",
+      "FF Max": "https://link4m.net/1R9vDR8"
+    }
+  },
+  {
+    id: "mp40-mangxa-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - MP40 Hoàng Kim Thành MP40 Mãng Xà Lv7 Full Hiệu Ứng VIP",
+    char: "Súng: MP40",
+    date: "26/10/2026",
+    img: COVERG5,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4sub.com/5DfQiLSiOq",
+      "FF Max": "https://link4sub.com/MEZecyOMeG"
+    },
+    ios: {
+      "FF Thường": "https://link4sub.com/ebGnCTAtIV",
+      "FF Max": "https://link4sub.com/iSf1J7xi15"
+    }
+  },
+  {
+    id: "m1887-vutru-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Vũ Trụ Hủy Diệt",
+    char: "Súng: M1887",
+    date: "26/10/2026",
+    img: COVERG4,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/vqUOJ4",
+      "FF Max": "https://link4m.net/9nesPNG"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/DjcP4V",
+      "FF Max": "https://link4m.net/1ngcW"
+    }
+  },
+  {
+    id: "m1887-cat-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Vương Quốc Cát Full Hiệu Ứng VIP",
+    char: "Súng: M1887",
+    date: "25/10/2026",
+    img: COVERG3,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4sub.com/6Gn1rGGKMd",
+      "FF Max": "https://link4sub.com/o4NTE36obl"
+    },
+    ios: {
+      "FF Thường": "https://link4sub.com/wJRX8srIoI",
+      "FF Max": "https://link4sub.com/7TfpxHU2q7"
+    }
+  },
+  {
+    id: "ump-m1014-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - UMP Bậc Thầy Sáng Tạo Thành M1014 Huyết Hỏa",
+    char: "Súng: UMP, M1014",
+    date: "25/10/2026",
+    img: COVERG2,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/3klk5",
+      "FF Max": "https://link4m.net/ykIyW"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/2q75vSqG",
+      "FF Max": "https://link4m.org/ZYaoxuqD"
+    }
+  },
+  {
+    id: "m1887-ob55",
+    cat: "sung",
+    title: "MOD SKIN FF OB55 - M1887 Phong Xà Thành M1887 Hỏa Lộ",
+    char: "Súng: M1887",
+    date: "25/10/2026",
+    img: COVERG,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://link4m.net/F4lmsadO",
+      "FF Max": "https://link4m.org/KKKwfd4"
+    },
+    ios: {
+      "FF Thường": "https://link4m.net/oYhrP1o",
+      "FF Max": "https://link4m.org/t9U4ke"
+    }
+  },
+  {
+    id: "ignis-saitama-ob55",
+    title: "MOD SKIN FF OB55 - Ignis Full Hiệu Ứng + Nắm Đấm Saitama",
+    char: "Nhân vật: Ignis",
+    date: "19/10/2026",
+    img: COVER8,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/cwylfz08ha3s9b3/Ignis+FFT+ADR.zip/file?dkey=803iezqznaz&r=1098",
+      "FF Max": "https://www.mediafire.com/file/ize79pwqcyxjkzo/Ignis+FFMAX+ADR.zip/file?dkey=5fe6n3n63nj&r=1377"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/cnxz33zshcpktzv/Ignis+FFT+IOS+.zip/file?dkey=b2y4m3yq1f2&r=1969",
+      "FF Max": "https://www.mediafire.com/file/6oc7iyntyaug7x4/Ignis+FFMAX+IOS.zip/file?dkey=nz54nrmht3i&r=1744"
+    }
+  },
+  {
+    id: "alok-boy-pho-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Tóc Ưng Tộc Phong Cách Boy Phố",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "18/10/2026",
+    img: COVER7,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/y79woz062iwv4l9/ModFreeFireBOT_Skin_FFT_ANDROID_1790476700_f777b760.zip/file?dkey=7hclyva5prt&r=572",
+      "FF Max": "https://www.mediafire.com/file/u475bn79035kzkx/ModFreeFireBOT_Skin_FFM_ANDROID_1790476807_7acc4647.zip/file?dkey=fkhoef50l9h&r=1181"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/eqfnlbludtduitc/ModFreeFireBOT_Skin_FFT_IOS_1790476938_5aefbeb5.zip/file?dkey=n8tngsy6lct&r=660",
+      "FF Max": "https://www.mediafire.com/file/k0fpoz4sf611gpi/ModFreeFireBOT_Skin_FFM_IOS_1790477053_f55b24b7.zip/file?dkey=lpjtchm8hgu&r=824"
+    }
+  },
+  {
+    id: "alok-da-xanh-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Da Xanh Khăn Cam",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "17/10/2026",
+    img: COVER6,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/gij5p9cswlq4fie/MDUY+MOD+FF+ALOK+THU%CC%9B%CC%81C+TI%CC%89NH+ADR+FFTH+QD83.zip/file?dkey=cj72fw5nyhb&r=525",
+      "FF Max": "https://www.mediafire.com/file/rlgsqionf022us3/MDUY+MOD+FF+ALOK+THU%CC%9B%CC%81C+TI%CC%89NH+ADR+FFM+CB30.zip/file?dkey=jokj3euadq8&r=1776"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/lgiuq7a66qpzlp0/MDUY+MOD+FF+ALOK+THU%CC%9B%CC%81C+TI%CC%89NH+IOS+FFTH+WD63.zip/file?dkey=b1ls8swi3om&r=345",
+      "FF Max": "https://www.mediafire.com/file/f834f6ogf8lgy8y/MDUY+MOD+FF+ALOK+THU%CC%9B%CC%81C+TI%CC%89NH+IOS+FFM+FM79.zip/file?dkey=mhzqmadugqm&r=367"
+    }
+  },
+  {
+    id: "alok-ao-khoac-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Áo Khoác Trắng",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "16/10/2026",
+    img: COVER5,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/0pc6zhs63urv704/VANQUANG_1_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFTH_KC01.zip/file",
+      "FF Max": "https://www.mediafire.com/file/zb1k5p8udbmxi3j/VANQUANG_1_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFM_ZG51.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/1wnrzn1src38h1n/VANQUANG_1_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFTH_FW50.zip/file",
+      "FF Max": "https://www.mediafire.com/file/zatix4ykn55vm60/VANQUANG_1_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFM_FS66.zip/file"
+    }
+  },
+  {
+    id: "alok-ao-do-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh Áo Đỏ Quần Đùi",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "15/10/2026",
+    img: COVER4,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/kgvrwt0tg3xau9w/VANQUANG_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFTH_WJ65_1.zip/file",
+      "FF Max": "https://www.mediafire.com/file/jbxe036bfa8qxdv/VANQUANG_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_ADR_FFM_AY66_1.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/daophd8szqrz7lx/VANQUANG_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFTH_VN42_1.zip/file",
+      "FF Max": "https://www.mediafire.com/file/qjngyxxfk7gnz6f/VANQUANG_ALOK_TH%25E1%25BB%25A8C_T%25E1%25BB%2588NH_IOS_FFM_BD39_1.zip/file"
+    }
+  },
+  {
+    id: "ignis-sasuke-ob55",
+    title: "MOD SKIN FF OB55 - Ignis Áo Sasuke",
+    char: "Nhân vật: Ignis",
+    date: "15/10/2026",
+    img: COVER3,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/6wurf6oa9rozh55/KEN_MOD_Z_OB55_IGNIS_AO_SASUKE_FF_THUONG_ADR.zip/file?dkey=0la56im2rn6&r=798",
+      "FF Max": "https://www.mediafire.com/file/9tzyuxu146tokrx/KEN_MOD_Z_OB55_IGNIS_AO_SASUKE_FF_MAX_ADR.zip/file?dkey=a7bpz1xwhpt&r=1909"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/m3fygcdaebhlpux/KEN_MOD_Z_OB55_IGNIS_AO_SASUKE_FF_THUONG_IOS.zip/file?dkey=3gqpdcdfvda&r=1767",
+      "FF Max": "https://www.mediafire.com/file/q8wjo9agcmw60lq/KEN_MOD_Z_OB55_IGNIS_AO_SASUKE_FF_MAX_IOS.zip/file?dkey=rdgvgvx0nnz&r=1117"
+    }
+  },
+  {
+    id: "alok-ob55",
+    title: "MOD SKIN FF OB55 - Alok Thức Tỉnh",
+    char: "Nhân vật: Alok Thức Tỉnh",
+    date: "14/10/2026",
+    img: COVER2,
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/7qfi7qnim4myrlz/VANQUANG_2__ADR_FFTH_NZ34_1.zip/file",
+      "FF Max": "https://www.mediafire.com/file/xiaohez1wzct48c/VANQUANG_2_ADR_FFM_XM51_1.zip/file"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/zb4mmb29ym4my0k/VANQUANG_2_IOS_FFTH_VZ29_1.zip/file",
+      "FF Max": "https://www.mediafire.com/file/jo4nl3ttn0a904u/VANQUANG_2_IOS_FFM_AW99_1.zip/file"
+    }
+  },
+  {
+    id: "ignis-ob55",
+    title: "MOD SKIN FF OB55 - Ignis",
+    char: "Nhân vật: Ignis",
+    date: "14/10/2026",
+    versions: ["FF Thường", "FF Max"],
+    android: {
+      "FF Thường": "https://www.mediafire.com/file/qcs1t8pd3tt1o0w/FISH+MOD+IGNIS+ADR+FFTH+VF52.zip/file?dkey=xi5blo8om0y&r=1131",
+      "FF Max": "https://www.mediafire.com/file/n3d9y4j2uikp1u9/FISH+MOD+IGNIS+ADR+FFM+VF52.zip/file?dkey=m9t53d8x29y&r=1127"
+    },
+    ios: {
+      "FF Thường": "https://www.mediafire.com/file/csvkrwlu0s57pn4/FISH+MOD+IGNIS+IOS+FFTH+VF52.zip/file?dkey=arj7jbcukax&r=1493",
+      "FF Max": "https://www.mediafire.com/file/o1kgs2epcre67vt/FISH+MOD+IGNIS+IOS+FFM+VF52.zip/file?dkey=jjxspkx8q2k&r=1064"
+    }
+  }
+];
+const NOTICE = "Link No Vượt";
+
+const app = document.getElementById("app");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const thumb = p => `<img class="cover" loading="lazy" decoding="async" src="${p.img || COVER}" style="object-position:${p.pos || "center"}${p.wide ? ";aspect-ratio:auto" : ""}" alt="${esc(p.title)}">`;
+
+function landing(){
+  app.innerHTML = `<section class="home-panel"><h1>Chào mừng đến với VanQuang</h1><p>Kho chia sẻ MOD ĐỒ và MOD SÚNG Free Fire</p><a class="home-link" href="#/mod-do">Khám phá MOD ĐỒ</a></section>`;
+}
+
+function home(){
+  app.innerHTML = `<h1 class="sec">MOD ĐỒ</h1><div class="note">${esc(NOTICE)}</div>` + POSTS.filter(p => !p.cat).map(p => `
+    <a class="card" href="#/${p.id}">
+      ${thumb(p)}
+      <h2>${esc(p.title)}</h2><p>${esc(p.char)}</p>
+    </a>`).join("");
+}
+
+function detail(p){
+  const group = (name, icon, links) => `<div class="box"><h3>${icon} ${name}</h3>` +
+    p.versions.map(v => `<a class="dl" href="${esc(links[v] || "#")}" target="_blank" rel="noopener">${esc(v)}</a>`).join("") + `</div>`;
+  app.innerHTML = `<article class="post">
+    <h1>${esc(p.title)}</h1>
+    ${thumb(p)}
+    <div class="date">Ngày đăng: ${esc(p.date)}</div>
+    <ul class="info"><li>🎭 ${esc(p.char)}</li><li>📦 Phiên bản hỗ trợ: ${esc(p.versions.join(", "))}</li></ul><div class="note">${p.note || (p.cat === "sung" ? "Link Vượt 1 Lần" : "Link No Vượt")}</div>
+    ${group("Android","📱",p.android)}${group("iOS","🍎",p.ios)}
+    <a class="back" href="${p.cat === "sung" ? "#/sung" : "#/mod-do"}">${p.cat === "sung" ? "← Quay lại MOD SÚNG" : "← Quay lại MOD ĐỒ"}</a></article>`;
+}
+
+function guns(){
+  const list = POSTS.filter(p => p.cat === "sung");
+  app.innerHTML = `<h1 class="sec">MOD SÚNG</h1><div class="note">Link Vượt 1 Lần</div>` + (list.length ? list.map(p => `
+    <a class="card" href="#/${p.id}">
+      ${thumb(p)}
+      <h2>${esc(p.title)}</h2><p>${esc(p.char)}</p>
+    </a>`).join("") : `<p class="hint">Chưa có bài.</p>`) + `<a class="back" href="#/mod-do">← Quay lại MOD ĐỒ</a>`;
+}
+
+/* ===== BÁO LỖI =====
+   DB_URL: để trống thì số lượt báo lỗi chỉ lưu trên từng máy.
+   Dán link Firebase vào đây (ví dụ "https://ten-du-an-default-rtdb.firebaseio.com")
+   thì số lượt báo lỗi sẽ chung cho tất cả mọi người. */
+const DB_URL = "https://vanquang-77dbc-default-rtdb.asia-southeast1.firebasedatabase.app";
+const ZALO = "https://zaloapp.com/qr/p/p8pa8dlri07z?src=qr";
+const ISSUES = [
+  { k: "link", t: "Link bị hỏng, lỗi và không cài được" },
+  { k: "skin", t: "Mod nhưng vào game không hiện skin" },
+  { k: "mat", t: "Mod bị mất đồ và hiệu ứng trong trận" }
+];
+const store = {
+  async count(k) {
+    if (DB_URL) {
+      try {
+        const r = await fetch(`${DB_URL}/reports/${k}.json?shallow=true`);
+        const d = await r.json();
+        return d ? Object.keys(d).length : 0;
+      } catch (e) { return null; }
+    }
+    try { return +localStorage.getItem("bl_n_" + k) || 0; } catch (e) { return 0; }
+  },
+  async add(k) {
+    if (DB_URL) {
+      try { await fetch(`${DB_URL}/reports/${k}.json`, { method: "POST", headers: { "Content-Type": "text/plain" }, body: String(Date.now()) }); } catch (e) {}
+      return;
+    }
+    try { localStorage.setItem("bl_n_" + k, String((+localStorage.getItem("bl_n_" + k) || 0) + 1)); } catch (e) {}
+  }
+};
+const showCount = async k => {
+  const el = document.getElementById("n-" + k);
+  if (!el) return;
+  const n = await store.count(k);
+  el.textContent = n === null ? "–" : n + " lượt";
+};
+
+function report(){
+  app.innerHTML = `<h1 class="sec">Báo lỗi</h1>
+    <p class="ask">Bạn đang gặp vấn đề gì?</p>
+    ${ISSUES.map(i => `<button type="button" class="issue" data-k="${i.k}"><span>${esc(i.t)}</span><b id="n-${i.k}">…</b></button>`).join("")}
+    <div id="thanks" class="note" hidden>Cảm ơn bạn đã báo lỗi, chúng tôi sẽ sớm fix lỗi này.</div>
+    <div class="box contact"><h3>Liên hệ admin VanQuang qua</h3>
+      <a class="zalo" href="${ZALO}" aria-label="Zalo của admin VanQuang">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="#0068ff"/><text x="24" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="16" fill="#fff">Zalo</text></svg>
+        <span>Zalo</span></a></div>
+    <a class="back" href="#/mod-do">← Quay lại MOD ĐỒ</a>`;
+  ISSUES.forEach(i => showCount(i.k));
+  app.querySelectorAll(".issue").forEach(b => b.addEventListener("click", async () => {
+    const k = b.dataset.k;
+    let last = 0;
+    try { last = +localStorage.getItem("bl_t_" + k) || 0; } catch (e) {}
+    if (Date.now() - last > 864e5) {   /* mỗi máy chỉ tính 1 lượt/mục mỗi 24 giờ */
+      await store.add(k);
+      try { localStorage.setItem("bl_t_" + k, String(Date.now())); } catch (e) {}
+      await showCount(k);
+    }
+    const t = document.getElementById("thanks");
+    t.hidden = false;
+    t.scrollIntoView({ behavior: "smooth", block: "center" });
+  }));
+}
+
+function route(){
+  const id = location.hash.replace("#/", "");
+  const p = POSTS.find(x => x.id === id);
+  id === "sung" ? guns() : id === "bao-loi" ? report() : id === "mod-do" ? home() : p ? detail(p) : landing();
+  window.scrollTo(0, 0);
+}
+window.addEventListener("hashchange", route);
+
+
+/* Chuyển giao diện sáng/tối và lưu lựa chọn trên thiết bị */
+const themeBtn = document.getElementById("themeBtn");
+const applyTheme = theme => {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeBtn.textContent = theme === "dark" ? "🌙" : "☀️";
+  themeBtn.setAttribute("aria-label", theme === "dark" ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối");
+  try { localStorage.setItem("vq_theme", theme); } catch (e) {}
+};
+let savedTheme = "light";
+try { savedTheme = localStorage.getItem("vq_theme") || "light"; } catch (e) {}
+applyTheme(savedTheme === "dark" ? "dark" : "light");
+themeBtn.addEventListener("click", () => applyTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+
+/* Menu 3 gạch: Báo lỗi */
+const menuBtn = document.getElementById("menuBtn");
+const menuDrop = document.getElementById("menuDrop");
+const setMenu = open => { menuDrop.hidden = !open; menuBtn.setAttribute("aria-expanded", String(open)); };
+menuBtn.addEventListener("click", e => { e.stopPropagation(); setMenu(menuDrop.hidden); });
+document.addEventListener("click", e => { if (!menuDrop.contains(e.target)) setMenu(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+window.addEventListener("hashchange", () => setMenu(false));
+
+/* Pop-up thông báo: hiện mỗi lần mở web (trừ khi khách tích không hiển thị hôm nay) */
+const pop = document.getElementById("pop");
+const popClose = document.getElementById("popClose");
+const closePop = () => { pop.hidden = true; document.body.style.overflow = ""; };
+const openPop = () => { pop.hidden = false; document.body.style.overflow = "hidden"; popClose.focus(); };
+popClose.addEventListener("click", closePop);
+document.querySelectorAll(".pop-xhit").forEach(b => b.addEventListener("click", closePop));
+pop.addEventListener("click", e => { if (e.target === pop) closePop(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !pop.hidden) closePop(); });
+const popKey = (() => { const d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); })();
+const popSkip = document.getElementById("popSkip");
+popSkip.addEventListener("change", () => {
+  try { popSkip.checked ? localStorage.setItem("pop_skip_tb", popKey) : localStorage.removeItem("pop_skip_tb"); } catch (e) {}
+  popSkipped = popSkip.checked;
+});
+let popSkipped = false;
+try { popSkipped = localStorage.getItem("pop_skip_tb") === popKey; } catch (e) {}
+if (!popSkipped && (!location.hash || location.hash === "#/" || location.hash === "#/trang-chu")) openPop();
+window.addEventListener("hashchange", () => {
+  const onHome = !location.hash || location.hash === "#/" || location.hash === "#/trang-chu";
+  if (onHome && !popSkipped && pop.hidden) openPop();
+});
+/* Gỡ bản app cũ (nếu máy khách đã cài) để không bị lỗi khi các file app đã xóa */
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister())).catch(() => {});
+  if (window.caches) caches.keys().then(ks => ks.forEach(k => caches.delete(k))).catch(() => {});
+}
+route();
+</script>
+</body>
+</html>
