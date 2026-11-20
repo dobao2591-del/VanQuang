@@ -19,6 +19,10 @@ header{position:relative;text-align:center;padding:22px 16px 10px}
 .logo{display:flex;align-items:center;justify-content:center;gap:12px}.mark{width:64px;height:64px;border-radius:16px;object-fit:cover;background:#fff}.cover{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}.post .cover{border-radius:14px}
 nav{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:6px 12px 14px;border-bottom:1px solid var(--line)}
 nav a{color:var(--ink);text-decoration:none;padding:9px 16px;border-radius:99px;border:1px solid var(--line);background:var(--card);box-shadow:var(--shadow);font-weight:700;font-size:14px}
+@media(max-width:600px){
+  nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;padding-left:10px;padding-right:10px}
+  nav a{min-width:0;padding:9px 3px;font-size:clamp(9px,2.8vw,12px);text-align:center;white-space:nowrap}
+}
 nav a:hover,nav a:focus-visible{background:var(--card);outline:2px solid var(--acc)}
 main{max-width:680px;margin:0 auto;padding:16px}
 .note{background:var(--note);color:var(--note-t);border-radius:12px;padding:14px 16px;text-align:center;font-size:15px;margin-bottom:18px}
